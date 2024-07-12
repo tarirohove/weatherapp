@@ -7,9 +7,11 @@ import jakarta.validation.constraints.NotEmpty;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController
 public class WeatherController {
@@ -34,7 +36,7 @@ public class WeatherController {
 
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler({IllegalArgumentException.class,MissingRequestValueException.class})
+    @ExceptionHandler({IllegalArgumentException.class,MissingRequestValueException.class, HandlerMethodValidationException.class})
     public String handleValidationExceptions( Exception ex) {
         return ex.getMessage();
     }

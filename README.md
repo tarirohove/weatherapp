@@ -1,6 +1,6 @@
 ### Design and Implementation of the Weather Application
 
-The Weather Application is designed to provide real-time weather data by interfacing with the OpenWeatherMap API. The application is built using the Spring Boot framework to create a robust and easy-to-maintain service. The primary features include fetching weather data based on city and country inputs, rate limiting to ensure API key usage compliance and proper error handling.
+The Weather Application is designed to provide real-time weather data by interfacing with the OpenWeatherMap API. The application is built using the Spring Boot framework to create a robust and easy-to-maintain service. The primary features include fetching weather data based on city and country inputs, rate limiting to ensure API key fair usage and compliance.
 
 #### Design Overview
 
@@ -61,7 +61,7 @@ This structured approach ensures the Weather Application is well-designed, modul
 
 #### Prerequisites
 
-- **Java Development Kit (JDK) 11 or later**: Ensure you have JDK installed. You can download it from [Oracle JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or use an open-source alternative like [AdoptOpenJDK](https://adoptopenjdk.net/).
+- **Java Development Kit (JDK) 17 or later**: Ensure you have JDK installed. You can download it from [Oracle JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or use an open-source alternative like [AdoptOpenJDK](https://adoptopenjdk.net/).
 - **Maven**: Make sure you have Maven installed for dependency management and building the project. Download it from [Maven Download](https://maven.apache.org/download.cgi).
 - **IDE**: An Integrated Development Environment like IntelliJ IDEA, Eclipse, or Visual Studio Code.
 - **Internet Connection**: To fetch dependencies and access the OpenWeatherMap API.
@@ -71,14 +71,14 @@ This structured approach ensures the Weather Application is well-designed, modul
 1. **Clone the Repository**:
     - Clone the project repository to your local machine using Git:
       ```sh
-      
+       git clone https://github.com/tarirohove/weatherapp.git
       ```
 
 2. **Configure API Key**:
     - Obtain an API key from [OpenWeatherMap](https://home.openweathermap.org/users/sign_up).
     - Update the `application.properties` file located in `src/main/resources` with your list of valid API keys comma separated:
       ```properties
-      openweathermap.api.key.list=YOUR_API_KEY_FROM_OPEN_WEATHER_MAP
+      openweathermap.api.key.list=YOUR_API_KEY_COMMA_SEPARATED_LIST_FROM_OPEN_WEATHER_MAP
       ```
 
 3. **Build the Project**:
