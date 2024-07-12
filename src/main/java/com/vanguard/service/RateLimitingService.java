@@ -18,7 +18,7 @@ public class RateLimitingService {
 
     public RateLimitingService(@Value("${openweathermap.api.key.list}") String[] validApiKeyTokens) {
         Map<String,Bucket> abucketMap = new HashMap<>();
-        Bandwidth limit = Bandwidth.classic(2, Refill.greedy(1, Duration.ofHours(1)));
+        Bandwidth limit = Bandwidth.classic(5, Refill.greedy(5, Duration.ofHours(1)));
         Arrays.stream(validApiKeyTokens).forEach(token -> {
             Bucket bucket = Bucket.builder()
                     .addLimit(limit)
