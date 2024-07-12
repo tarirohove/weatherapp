@@ -50,32 +50,30 @@ public class WeatherControllerTest {
         mockMvc.perform(get("/weather")
                         .param("city", "London")
                         .param("country", "UK")
-                .header("X-API-KEY", "apiKey"))
+                .header("X-API-KEY", "validApiKey"))
                 .andExpect(status().isOk())
                 .andExpect(content().string("clear sky"));
     }
 
     @Test
-    public void whenUnexpectedRequestParam_thenReturns400() throws Exception {
+    public void whenInvalidRequestParam_thenReturns400() throws Exception {
         Mockito.when(weatherService.fetchWeatherInformation(eq("London"), eq("UK"), Mockito.anyString())).thenReturn("clear sky");
 
         ResultActions result = mockMvc.perform(get("/weather")
-                        .param("badParamName0", "London")
-                        .param("badParamName1", "UK")
-                .header("AUTH_TOKEN_HEADER_NAME", "dummyApiKey"))
-
+                        .param("invalidRequestParam0", "London")
+                        .param("invalidRequestParam1", "UK")
+                .header("AUTH_TOKEN_HEADER_NAME", "validApiKey"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Required request parameter 'city' for method parameter type String is not present"));
     }
 
     @Test
-    public void whenInvalidTokenHeaderForKey_thenReturns400() throws Exception {
+    public void whenInvalidTokenHeader_thenReturns400() throws Exception {
         ResultActions result = mockMvc.perform(get("/weather")
                 .param("city", "London")
-                .param("country", "Uk")
-                .header("INVALID_TOKEN_HEADER_NAME", "dummyApiKey"));
+                .param("country", "UK")
+                .header("INVALID_TOKEN_HEADER_NAME", "validApiKey"));
 
-        // Expect a 400 BAD REQUEST status and validate the response
         result.andExpect(status().isBadRequest())
                 .andExpect(content().string("Required request header 'X-API-KEY' for method parameter type String is not present"));
 
@@ -83,7 +81,6 @@ public class WeatherControllerTest {
 
     @Test
     public void whenRateLimitExceeded_thenReturns429() throws Exception {
-        // Simulate rate limit exceeded
         Mockito.when(rateLimiter.allowRequest(anyString())).thenReturn(Boolean.FALSE);
 
         mockMvc.perform(get("/weather")
