@@ -1,22 +1,20 @@
-package com.vanguard.dto;
+package com.vanguard.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 
+@Entity
 public class Sys {
-
-    @JsonProperty("type")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
+    private Long id;
     private int type;
-
     @JsonProperty("id")
-    private int sys_id;
-
-    @JsonProperty("country")
+    private Long sys_id;
     private String country;
-
-    @JsonProperty("sunrise")
     private long sunrise;
-
-    @JsonProperty("sunset")
     private long sunset;
 
     public int getType() {
@@ -27,13 +25,6 @@ public class Sys {
         this.type = type;
     }
 
-    public int getSys_id() {
-        return sys_id;
-    }
-
-    public void setSys_id(int sys_id) {
-        this.sys_id = sys_id;
-    }
 
     public String getCountry() {
         return country;
@@ -58,5 +49,20 @@ public class Sys {
     public void setSunset(long sunset) {
         this.sunset = sunset;
     }
-}
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getSys_id() {
+        return sys_id;
+    }
+
+    public void setSys_id(Long sys_id) {
+        this.sys_id = sys_id;
+    }
+}

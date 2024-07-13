@@ -1,10 +1,12 @@
 package com.vanguard.controller;
 
 import com.vanguard.exception.RateLimitExceededException;
+import com.vanguard.model.WeatherData;
 import com.vanguard.service.RateLimitingService;
 import com.vanguard.service.WeatherService;
 import jakarta.validation.constraints.NotEmpty;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MissingRequestValueException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
@@ -12,6 +14,10 @@ import org.springframework.web.reactive.function.client.WebClientException;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class WeatherController {
@@ -34,6 +40,11 @@ public class WeatherController {
         return weatherService.fetchWeatherInformation(city, country, apiKey);
     }
 
+    @GetMapping("/weather/latest")
+    public ResponseEntity<?> getLatestWeather(@RequestParam String city, @RequestParam String country) {
+        Optional<WeatherData> weatherData = weatherService.getLatestWeatherData(city, country);
+        return weatherData.map(ResponseEntity::ok).orElseThrow();
+    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({IllegalArgumentException.class,MissingRequestValueException.class, HandlerMethodValidationException.class})

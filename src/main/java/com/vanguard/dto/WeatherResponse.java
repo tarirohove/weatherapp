@@ -36,8 +36,6 @@ public class WeatherResponse {
     @JsonProperty("timezone")
     private int timezone;
 
-    @JsonProperty("id")
-    private long id;
 
     @JsonProperty("name")
     private String name;
@@ -125,13 +123,6 @@ public class WeatherResponse {
         this.timezone = timezone;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

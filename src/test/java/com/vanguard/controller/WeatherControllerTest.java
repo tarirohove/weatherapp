@@ -32,16 +32,6 @@ public class WeatherControllerTest {
     @MockBean
     private WeatherDataRepository repository;
 
-    private WeatherData weatherData;
-
-    @BeforeEach
-    void setUp() {
-        weatherData = new WeatherData();
-        weatherData.setCity("London");
-        weatherData.setCountry("UK");
-        weatherData.setDescription("clear sky");
-        weatherData.setTemperature(289.92);
-    }
 
     @Test
     public void testGetWeather() throws Exception {
