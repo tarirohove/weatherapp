@@ -30,7 +30,7 @@ public class RateLimiterFilter extends OncePerRequestFilter {
         }
 
         if (!rateLimitingService.allowRequest(apiKey)) {
-            response.sendError( HttpStatus.TOO_MANY_REQUESTS.value(), "Hourly rate limit has been exceeded for the provided API key: ");
+            response.sendError( HttpStatus.TOO_MANY_REQUESTS.value(), "Hourly rate limit has been exceeded for the provided API key.");
             return;
         }
 
