@@ -11,8 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class RateLimitingServiceTest {
 
     private RateLimitingService rateLimitingService;
-    @Mock
-    private Bucket bucket;
+
 
     @BeforeEach
     void setUp() {
