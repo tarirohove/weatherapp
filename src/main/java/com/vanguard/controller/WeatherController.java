@@ -52,7 +52,7 @@ public class WeatherController {
 
     @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler({ResultsNotFoundException.class})
-    public String handleWebClientException(ResultsNotFoundException ex) {
+    public String handleResultsNotFoundException(ResultsNotFoundException ex) {
          return ex.getMessage();
     }
 }

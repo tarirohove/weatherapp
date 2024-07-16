@@ -8,7 +8,8 @@ The design is centered around a RESTful web service architecture. The core compo
 
 1. **WeatherController**:
    - Handles incoming HTTP requests.
-   - Provides an endpoint `/weather` to fetch weather data.
+   - Provides an endpoint `/weather` to fetch weather data from openweatherapi service.
+   - Provide and endpoint `/weather/latest` to fetch weather data from the database
    - Uses the rate limiting service to restrict excessive API calls.
    - Includes exception handling to manage validation errors and rate limits error handling.
 
@@ -24,7 +25,8 @@ The design is centered around a RESTful web service architecture. The core compo
    - Facilitate easy mapping and access to weather data.
 
 4. **RateLimiter**:
-   - Implements a token-bucket algorithm to control the rate of API requests.
+   - Implemented using a filter.
+   - a token-bucket algorithm is used to control the rate of API requests.
    - Ensures each API key is limited to a maximum of 5 requests per hour.
    - Throws a custom exception when the rate limit is exceeded.
 
@@ -41,13 +43,15 @@ The design is centered around a RESTful web service architecture. The core compo
    - Provides the fetched data back to the controller for response to the client.
 
 3. **Rate Limiting**:
+   - A filter implements rate filtering and each request is automatically passed through that filter
    - Implemented using a token-bucket algorithm to track and control the number of requests.
    - Each API key is assigned a bucket that allows up to 5 tokens (requests) per hour.
    - Tokens are consumed with each request, and a request is denied if no tokens are available.
 
 4. **Exception Handling**:
    - `handleValidationExceptions` method manages validation errors and returns appropriate error messages.
-   - `handleRateLimitExceededException` method catches rate limit exceptions and returns a 429 status code with an error message.
+   - `handleWebClientException` method manages errors in the downstream openweatherapi service and returns appropriate error messages.
+   - `handleResultsNotFoundException` method manages errors when a database query does not return any result and returns appropriate error messages.
 
 #### Testing
 

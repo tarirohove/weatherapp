@@ -128,9 +128,8 @@ The `/weather/latest` endpoint is a well-designed and implemented feature that l
 
 1. **WeatherController**:
     - The controller exposes the `/weather` endpoint which accepts city, country, and API key as inputs.
-    - It checks the rate limit for the provided API key and throws a `RateLimitExceededException` if the limit is reached.
+    - The controller exposes the `/weather/latest` endpoint which accepts city, country, and API key as inputs.
     - If the rate limit is not exceeded, it calls the `WeatherService` to fetch weather data.
-
 2. **WeatherService**:
     - Uses Spring WebClient to send HTTP GET requests to the OpenWeatherMap API.
     - Maps the JSON response to the `WeatherResponse` DTO.
